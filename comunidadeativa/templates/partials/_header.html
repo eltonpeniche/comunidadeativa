@@ -1,0 +1,98 @@
+  <!-- ======= Header ======= -->
+  <section id="topbar" class="topbar d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-end">
+
+      <div class="contact-info d-flex align-items-center" >
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+55 99 5548855</span></i>
+        
+      </div>
+
+      <div class="social-links d-none d-md-flex align-items-center">
+
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section><!-- End Top Bar -->
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="{% url 'amazoncred:index' %}" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Comunidade<span class="titulo-logomarca">Ativa</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{% url 'amazoncred:index' %}">Início</a></li>
+          <li><a href="#about">Sobre</a></li>
+          
+          <li class="dropdown"><a href="{% url 'amazoncred:programas' %}"><span>Programas</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+                <li><a href="#">Comunidade Ativa Rural</a></li>
+                <li><a href="#">Comunidade Ativa Urbano</a></li>
+                <li><a href="#team">Aprendiz de Aprendizes</a></li>
+            </ul>
+          </li>
+
+
+          <li><a href="{% url 'amazoncred:transparencia' %}">Transparência</a></li>
+          <li><a href="{% url 'amazoncred:blog' %}">Notícias</a></li>
+          <li><a href="{% url 'amazoncred:nossos-enderecos' %}">Nossos Endereços</a></li>
+          <li class="dropdown"><a href="#teste"><span>Fale Conosco</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+                <li><a href="{% url 'amazoncred:contato' %}">Contato</a></li>
+                <li><a href="#team">Trabalhe Conosco</a></li>
+                <li><a href="{% url 'amazoncred:perguntas-frequentes' %}">Perguntas Frequentes</a></li>
+            </ul>
+          </li>
+
+
+          {% if user.is_authenticated %}
+          <li class="dropdown"><a href="#"><span> {{ user.get_username |title }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+                <li><a href="#">Meus Dados</a></li>
+                <li><a href="{% url 'amazoncred:logout' %}">Sair</a></li>
+            </ul>
+          </li>
+          {% else %}
+            <li><a href="" data-bs-toggle="modal"                           data-bs-target="#login-modal"
+              hx-get="{% url 'amazoncred:login' %}?parametro=True"
+              hx-trigger="click"
+              hx-target="#login-modal-content"
+              >
+              Entrar
+            </a></li>
+            
+            <!-- Modal Login -->
+            <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div id="login-modal-content" class="modal-body">
+                    {% include 'partials/login/_login_partial.html' %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+            
+          {% endif %}
+
+          
+          
+        </ul>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->

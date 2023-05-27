@@ -1,0 +1,56 @@
+{% extends "base.html"%}
+{% load static %}
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="{% url 'amazoncred:index' %}">Home</a></li>
+            <li><a href="{% url 'amazoncred:blog' %}">Transparência</a></li>
+            <li>Transparencia Details</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Transparencia Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+        {% include 'partials/_alertas.html' %}
+        
+        <div id="tabs" hx-target="#tab-contents" _="on htmx:afterOnLoad take .active for event.target">
+            <nav id="navbar" class="navbar">
+        <ul>
+            <li><a href="" class="nav-link active" hx-get="{% url 'amazoncred:tab' %}?num=1">Demonstrativos Contábeis e Financeiros</a>
+            </li>
+
+            <li><a href="" class="nav-link" hx-get="{% url 'amazoncred:tab' %}?num=2" >Termos de Parceria</a>
+            
+            <li><a href="" class="nav-link" hx-get="{% url 'amazoncred:tab' %}?num=2" >Certidões</a>
+            </li>
+            <li><a class="nav-link" hx-get="{% url 'amazoncred:tab' %}?num=3" >Editais</a>
+            <li>
+        </ul>
+            </nav>
+
+        </div>
+      
+        <div id="tab-contents" hx-get="{% url 'amazoncred:tab' %}?num=1" hx-trigger="load"></div>
+    
+    </div>
+    
+
+    </section>    
+
+  </main><!-- End #main -->
+
+  {% endblock content %}
+
+  
+{% block extra_scripts %}
+    <script src="https://unpkg.com/hyperscript.org"></script>
+{% endblock %}
