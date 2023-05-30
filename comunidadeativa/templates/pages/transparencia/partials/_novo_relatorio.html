@@ -34,7 +34,13 @@
       <div class="d-flex justify-content-end">
         <div class="align-self-end mt-1"> 
           <button class="btn btn-success">Enviar</button>
-          <button class="btn btn-secondary" hx-get="/contact/1">Cancelar</button>
+          <button class="btn btn-secondary" 
+                  hx-get="{% url 'amazoncred:tab' %}?tipo={{tipo}}"
+                  hx-trigger='click' 
+                  hx-indicator="#indicator"
+          
+          
+          >Cancelar</button>
       </div>
   </div>
 

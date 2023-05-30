@@ -29,7 +29,6 @@ ponto.*
 # Python #
 *.py[cod]
 *$py.class
-*.pyc
 
 # Distribution / packaging
 .Python build/
