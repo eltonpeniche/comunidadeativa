@@ -113,7 +113,7 @@ class TIPO_RELATORIO(models.TextChoices):
 
 class Relatorio(models.Model):
     titulo = models.CharField(max_length=200, unique=True, verbose_name=_('Título'))
-    arquivo = models.FileField(upload_to='transparencia/dc/%Y/%m/%d/', blank=True)
+    arquivo = models.FileField(upload_to='transparencia/dc/%Y/%m/%d/', blank=False, null=False)
 
     tipo_relatorio = models.CharField( max_length=2, choices=TIPO_RELATORIO.choices, blank=False, null=False, default='DC')
 
