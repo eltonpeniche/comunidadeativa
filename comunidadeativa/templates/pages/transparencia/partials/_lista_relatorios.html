@@ -17,7 +17,11 @@
         <thead>
             <tr>
               <th scope="col">Título</th>
-              <th scope="col">Link</th>
+              <th scope="col">Baixar</th>
+              {% if user.is_authenticated %}
+              <th scope="col">Editar</th>
+              <th scope="col">Apagar</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -25,11 +29,21 @@
             <tr>
               <td>{{ obj.titulo }}</td>
               {% if obj.arquivo %}
+              
               <td><a href="{{obj.arquivo.url}}" target="_blank"><i class="fa-solid fa-download"></i></a></td>
               {% else %}
               <td>#</td>
               {% endif %}
               
+              {% if user.is_authenticated %}
+              <td> 
+                <a href="#" hx-get="{% url 'amazoncred:editar_relatorio' %}?id={{obj.id}}" 
+                hx-target="#tab-contents">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+              </td>
+              <td><i class="fa-solid fa-trash"></i></td>
+              {% endif %}
 
             </tr>
             {% empty %}

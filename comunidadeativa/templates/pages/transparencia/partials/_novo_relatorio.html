@@ -1,7 +1,7 @@
 
 {% load widget_tweaks %}
 
-<h2>Nova Entrada </h2>
+<h2>{{titulo}} </h2>
 
 <form hx-post="{% url 'amazoncred:novo_relatorio' %}" 
       hx-target="#tab-contents" enctype="multipart/form-data">      
@@ -29,6 +29,7 @@
         </div>
         {% endfor %}
       <input type="hidden" value="{{tipo}}" name='tipo'>
+      <input type="hidden" value="{{id}}" name='id'>
     
       
       <div class="d-flex justify-content-end">
