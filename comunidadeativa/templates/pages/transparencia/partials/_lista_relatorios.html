@@ -42,7 +42,14 @@
                   <i class="fa-solid fa-pen-to-square"></i>
                 </a>
               </td>
-              <td><i class="fa-solid fa-trash"></i></td>
+              <td> <form action="" hx-POST="{% url 'amazoncred:remover_relatorio' %}"  
+                hx-target="#tab-contents">
+                  <input type="hidden" name="id", value="{{obj.id}}">
+                  <input type="hidden" name="tipo" value="{{tipo}}">
+                  <button style="border: none; color: var(--color-primary)" type="submit"><i class="fa-solid fa-trash"></i></button>
+                  </form>
+                </a> 
+              </td>
               {% endif %}
 
             </tr>

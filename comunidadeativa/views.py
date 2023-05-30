@@ -171,7 +171,7 @@ def novo_relatorio(request):
           id = request.POST.get('id')
           tipo = request.POST.get('tipo')
           
-          if id is not None:
+          if id:
                relatorio = get_object_or_404(Relatorio, pk = id)
                form = RelatorioForm(request.POST, request.FILES, instance=relatorio)
                if form.is_valid():
@@ -207,6 +207,20 @@ def editar_relatorio(request):
                     'id': id,
                     'titulo':'Editar Relatório'}
      return render(request, 'pages/transparencia/partials/_novo_relatorio.html', contexto)
+
+def remover_relatorio(request):
+     
+     id = request.POST.get('id')
+     tipo = request.POST.get('tipo')
+
+     print(id, tipo, '|\n' ,request.POST)
+     
+     relatorio = get_object_or_404(Relatorio, pk = id)
+     relatorio.delete()
+     
+     demonstracoes_contabeis = Relatorio.objects.filter(tipo_relatorio = tipo.upper()).order_by('-id')
+     
+     return render(request, 'pages/transparencia/partials/_lista_relatorios.html',{'obj_list': demonstracoes_contabeis})
 
 """
 class RecipeListViewTag(RecipeListViewBase):

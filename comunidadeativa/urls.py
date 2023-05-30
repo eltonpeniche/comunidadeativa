@@ -31,6 +31,9 @@ urlpatterns = [
      path('transparencia/novo_relatorio', views.novo_relatorio, name='novo_relatorio'),
 
      path('transparencia/editar_relatorio', views.editar_relatorio, name='editar_relatorio'),
+
+     path('transparencia/remover_relatorio', views.remover_relatorio, name='remover_relatorio'),
+
      #path('blog/tags/<slug:slug>/', views.RecipeListViewTag.as_view(), name="tag"),
 
 
