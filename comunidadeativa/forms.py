@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django_select2 import forms as s2forms
 from django_select2.forms import Select2MultipleWidget, Select2Widget
 
-from comunidadeativa.models import Categoria_Post, Tag
+from comunidadeativa.models import Categoria_Post, Relatorio, Tag
 
 from .models import Post
 
@@ -81,3 +81,10 @@ class LoginForm(forms.Form):
         required=True,
         widget = forms.PasswordInput(attrs={'placeholder':'Senha', 'class':'form-control'})
     )
+
+#TRANSPARENCIA
+class RelatorioForm(forms.ModelForm):
+
+    class Meta:
+        model = Relatorio
+        fields = ['titulo', 'arquivo', ]

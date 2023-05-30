@@ -28,6 +28,8 @@ urlpatterns = [
 
      path('transparencia/', views.transparencia, name='transparencia'),
      path('transparencia/tab/', views.tab, name='tab'),
+     path('transparencia/novo_relatorio', views.novo_relatorio, name='novo_relatorio'),
+
      #path('blog/tags/<slug:slug>/', views.RecipeListViewTag.as_view(), name="tag"),
 
 

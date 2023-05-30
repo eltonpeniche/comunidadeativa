@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from time import sleep
 
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
@@ -8,8 +9,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
-from .forms import LoginForm, PostForm
-from .models import Categoria_Post, Post, Tag
+from .forms import LoginForm, PostForm, RelatorioForm
+from .models import Categoria_Post, Post, Relatorio, Tag
 from .utils import utils
 
 
@@ -154,9 +155,34 @@ def transparencia(request):
      return render(request, 'pages/transparencia/transparencia.html')
 
 def tab(request):
-     parametro = request.GET.get('num')
-     print(parametro)
-     return HttpResponse(f' O parametro é {parametro}')
+
+     tipo = request.GET.get('tipo')
+     relatorios = Relatorio.objects.filter(tipo_relatorio = tipo.upper()).order_by('-id')
+     contexto = {   'obj_list': relatorios,
+                    'tipo': tipo
+               }
+
+     return render(request, 'pages/transparencia/partials/_lista_relatorios.html', contexto)
+
+
+def novo_relatorio(request):
+     
+     if request.method == "POST":
+          tipo = request.POST.get('tipo')
+          form = RelatorioForm(request.POST, request.FILES)
+          if form.is_valid():
+               relatorio = form.save(commit=False)
+               relatorio.tipo_relatorio = tipo.upper()
+               relatorio.save()
+          demonstracoes_contabeis = Relatorio.objects.filter(tipo_relatorio = tipo.upper()).order_by('-id')
+          
+          return render(request, 'pages/transparencia/partials/_lista_relatorios.html',{'obj_list': demonstracoes_contabeis})
+     else:
+          tipo = request.GET.get('tipo')
+          form = RelatorioForm()
+          contexto = {'form': form,
+                      'tipo': tipo}
+          return render(request, 'pages/transparencia/partials/_novo_relatorio.html', contexto)
 
 """
 class RecipeListViewTag(RecipeListViewBase):

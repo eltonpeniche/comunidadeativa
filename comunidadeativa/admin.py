@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from comunidadeativa.models import Categoria_Post, Post, Tag
+from comunidadeativa.models import Categoria_Post, Post, Relatorio, Tag
 
 # Register your models here.
 
@@ -36,3 +36,14 @@ class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         'slug': ('nome',),
     }
+
+# TRANSPARENCIA
+
+
+@admin.register(Relatorio)
+class RelatorioAdmin(admin.ModelAdmin):
+    list_display = 'id', 'titulo'
+    list_display_links = 'id', 'titulo',
+    search_fields = 'id', 'titulo',
+    list_per_page = 25
+    ordering = '-id',

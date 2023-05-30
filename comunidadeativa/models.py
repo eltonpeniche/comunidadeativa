@@ -104,3 +104,19 @@ class Post(models.Model):
 
 
     
+#- TRANSPARENCIA
+class TIPO_RELATORIO(models.TextChoices):
+    DEMONSTRATIVOS_CONTABEIS = 'DC', _('Demonstrativos Contábeis E Financeiros')
+    TERMOS_PARCERIA = 'TM', _('Termos De Parceiros')
+    CERTIDOES = 'CE', _('Certidões')
+    Editais = 'ED', _('Editais')
+
+class Relatorio(models.Model):
+    titulo = models.CharField(max_length=200, unique=True, verbose_name=_('Título'))
+    arquivo = models.FileField(upload_to='transparencia/dc/%Y/%m/%d/', blank=True)
+
+    tipo_relatorio = models.CharField( max_length=2, choices=TIPO_RELATORIO.choices, blank=False, null=False, default='DC')
+
+    class Meta:
+        verbose_name = _('Relatório')
+        verbose_name_plural = _('Relatórios')

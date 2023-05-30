@@ -1,0 +1,40 @@
+{% if user.is_authenticated %}
+<div class="d-flex justify-content-end">
+    <div class="align-self-end mt-1"> 
+      <button hx-get="{% url 'amazoncred:novo_relatorio' %}?tipo={{tipo}}" 
+              hx-target="#tab-contents" class="btn btn-success"> Novo </button>
+    </div>
+</div>
+{% endif %}
+            
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col class="col-6">
+            <col class="col-2">
+        </colgroup>
+        <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in obj_list  %}
+            <tr>
+              <td>{{ obj.titulo }}</td>
+              {% if obj.arquivo %}
+              <td><a href="{{obj.arquivo.url}}" target="_blank"><i class="fa-solid fa-download"></i></a></td>
+              {% else %}
+              <td>#</td>
+              {% endif %}
+              
+
+            </tr>
+            {% empty %}
+            <tr><td>vazio</td></tr>
+            {% endfor %}
+          </tbody>
+    </table>
+  </div>

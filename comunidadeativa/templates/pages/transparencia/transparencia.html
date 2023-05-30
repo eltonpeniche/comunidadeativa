@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
 
+
+
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -23,23 +25,44 @@
         {% include 'partials/_alertas.html' %}
         
         <div id="tabs" hx-target="#tab-contents" _="on htmx:afterOnLoad take .active for event.target">
-            <nav id="navbar" class="navbar">
-        <ul>
-            <li><a href="" class="nav-link active" hx-get="{% url 'amazoncred:tab' %}?num=1">Demonstrativos Contábeis e Financeiros</a>
-            </li>
+          
+          <div class="nav">    
+            <ul>
+              <li><a href="nav-item" class="testea active" 
+                hx-get="{% url 'amazoncred:tab' %}?tipo=dc"
+                hx-indicator="#indicator"
+                >Demonstrativos Contábeis e Financeiros
 
-            <li><a href="" class="nav-link" hx-get="{% url 'amazoncred:tab' %}?num=2" >Termos de Parceria</a>
-            
-            <li><a href="" class="nav-link" hx-get="{% url 'amazoncred:tab' %}?num=2" >Certidões</a>
-            </li>
-            <li><a class="nav-link" hx-get="{% url 'amazoncred:tab' %}?num=3" >Editais</a>
-            <li>
-        </ul>
-            </nav>
+              </a></li>
 
+              <li><a href="nav-item" class="" hx-get="{% url 'amazoncred:tab' %}?tipo=tp" hx-indicator="#indicator" >Termos de Parceria
+              </a></li>
+              
+              <li><a href="nav-item" class="" hx-get="{% url 'amazoncred:tab' %}?tipo=ce" hx-indicator="#indicator" >Certidões
+              </a></li>
+              
+              <li><a class="nav-item" hx-get="{% url 'amazoncred:tab' %}?tipo=ed" hx-indicator="#indicator" >Editais
+              </a></li>
+              
+              
+                <div id="indicator">
+
+                  <div class="htmx-indicator spinner-border m-1" role="status" >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>  
+                </div>
+            </ul>
+          </div>
+        </div>
+        
+
+        <div id="tab-contents" class="container mt-3"  
+          hx-get="{% url 'amazoncred:tab' %}?tipo=dc"
+          hx-trigger='load' hx-indicator="#indicator">
+        
         </div>
       
-        <div id="tab-contents" hx-get="{% url 'amazoncred:tab' %}?num=1" hx-trigger="load"></div>
+      
     
     </div>
     
@@ -52,5 +75,10 @@
 
   
 {% block extra_scripts %}
-    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>     
+    
+    <script>
+
+    </script>
+    
 {% endblock %}
