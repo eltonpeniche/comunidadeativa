@@ -43,7 +43,11 @@
                 </a>
               </td>
               <td> <form action="" hx-POST="{% url 'amazoncred:remover_relatorio' %}"  
-                hx-target="#tab-contents">
+                hx-target="#tab-contents" _="on htmx:confirm(issueRequest)
+                halt the event
+                call Swal.fire({icon: 'error', title: 'Confirmar Exclusão', text:'Você deseja continuar?',showCancelButton: true,cancelButtonText:'Cancelar'})
+                if result.isConfirmed issueRequest()"
+                >
                   <input type="hidden" name="id", value="{{obj.id}}">
                   <input type="hidden" name="tipo" value="{{tipo}}">
                   <button style="border: none; color: var(--color-primary)" type="submit"><i class="fa-solid fa-trash"></i></button>
@@ -59,3 +63,5 @@
           </tbody>
     </table>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

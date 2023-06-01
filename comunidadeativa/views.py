@@ -62,7 +62,8 @@ def post_detalhes(request, slug):
                'posts_recentes': posts_recentes
                }
           return render(request, 'pages/noticias/blog-details.html', contexto)
-     
+
+@login_required(login_url="amazoncred:login", redirect_field_name="next")  
 def post_novo(request):
      if request.method == 'GET':
           form = PostForm()
@@ -85,7 +86,7 @@ def post_novo(request):
           
           
 
-@login_required
+@login_required(login_url="amazoncred:login", redirect_field_name="next")  
 def logout(request):
     auth.logout(request)
     print("Logout realizado com sucesso")
@@ -151,11 +152,9 @@ def pesquisar_post(request):
 
 
 def transparencia(request):
-
      return render(request, 'pages/transparencia/transparencia.html')
 
 def tab(request):
-
      tipo = request.GET.get('tipo')
      relatorios = Relatorio.objects.filter(tipo_relatorio = tipo.upper()).order_by('-id')
      contexto = {   'obj_list': relatorios,
@@ -165,6 +164,7 @@ def tab(request):
      return render(request, 'pages/transparencia/partials/_lista_relatorios.html', contexto)
 
 
+@login_required(login_url="amazoncred:login", redirect_field_name="next")  
 def novo_relatorio(request):
      
      if request.method == "POST":
@@ -197,6 +197,7 @@ def novo_relatorio(request):
                     'titulo':'Novo Relatório' }
           return render(request, 'pages/transparencia/partials/_novo_relatorio.html', contexto)
 
+@login_required(login_url="amazoncred:login", redirect_field_name="next")  
 def editar_relatorio(request):
      
      id = request.GET.get('id')
@@ -208,6 +209,7 @@ def editar_relatorio(request):
                     'titulo':'Editar Relatório'}
      return render(request, 'pages/transparencia/partials/_novo_relatorio.html', contexto)
 
+@login_required(login_url="amazoncred:login", redirect_field_name="next")  
 def remover_relatorio(request):
      
      id = request.POST.get('id')
