@@ -1,0 +1,58 @@
+<div style="margin-left:30px">
+    {% include 'partials/_alertas.html' %}
+</div>
+
+<form role="form" class="email-form"
+    hx-post="{% url 'amazoncred:contato' %}" 
+    hx-target="#form-content"
+    hx-indicator="#indicator">
+    {% csrf_token %}
+    
+    <div class="row">
+        <div class="col-md-6 form-group">
+        {{ form.nome }}
+        {% if form.nome.errors %}
+            <span style="color: red;" role="alert">
+                {{ form.nome.errors }}   
+            </span>
+        {% endif %}
+        </div>
+        <div class="col-md-6 form-group mt-3 mt-md-0">
+        {{ form.email }}
+        {% if form.email.errors %}
+            <span style="color: red;" role="alert">
+                {{ form.email.errors }}   
+            </span>
+        {% endif %}
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        {{ form.assunto }}
+        {% if form.assunto.errors %}
+            <span style="color: red;" role="alert">
+                {{ form.assunto.errors }}   
+            </span>
+        {% endif %}
+    </div>
+    <div class="form-group mt-3">
+        {{ form.mensagem }}
+        {% if form.mensagem.errors %}
+            <span style="color: red;" role="alert">
+                {{ form.mensagem.errors }}   
+            </span>
+        {% endif %}
+    </div>
+    <div class="my-3">
+        <div class="loading">Carregando</div>
+        <div class="error-message"></div>
+        <div  class="sent-message">Sua mensagem foi enviada. Obrigado! </div>
+    </div>
+    <div id="btn-send-form-contato" class="d-flex flex-column justify-content-center align-items-center">
+        <button class="d-inline"  type="submit">Enviar mensagem</button>
+        <div id="indicator">
+            <div class="htmx-indicator spinner-border m-2" role="status" >
+                <span class="visually-hidden">Loading...</span>
+            </div>  
+        </div>
+    </div>
+</form>

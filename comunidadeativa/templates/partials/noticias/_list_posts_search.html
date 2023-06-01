@@ -1,0 +1,26 @@
+{% load static %}
+
+{% comment %} {% for post in posts  %}
+<table>
+  <tr>
+    <td>{{ post.titulo }}</td>
+  </tr>
+</table>
+{% endfor %} 
+
+<ul>
+  {% for post in posts  %}
+  <li><a class="dropdown-item" href="#">{{ post.titulo }}</a></li>
+  {% endfor %}
+</ul>
+
+{% endcomment %}
+
+<div class="list-group">
+  {% for post in posts  %}
+  <a href="{% url "amazoncred:post-detalhes" post.slug %}" class="list-group-item list-group-item-action" aria-current="true">
+    <p class="mb-1"> <i class="bi bi-search"></i>
+     {{ post.titulo }}</p>
+  </a>
+  {% endfor %}
+</div>

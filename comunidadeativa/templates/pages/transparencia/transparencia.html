@@ -1,0 +1,83 @@
+{% extends "base.html"%}
+{% load static %}
+{% block content %}
+
+
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="{% url 'amazoncred:index' %}">Home</a></li>
+            <li><a href="{% url 'amazoncred:transparencia' %}">Transparência</a></li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Transparencia Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+        {% include 'partials/_alertas.html' %}
+        
+        <div id="tabs" hx-target="#tab-contents" _="on htmx:afterOnLoad take .active for event.target">
+          
+          <div class="nav">    
+            <ul>
+              <li><a href="nav-item" class="testea active" 
+                hx-get="{% url 'amazoncred:tab' %}?tipo=dc"
+                hx-indicator="#indicator"
+                >Demonstrativos Contábeis e Financeiros
+
+              </a></li>
+
+              <li><a href="nav-item" class="" hx-get="{% url 'amazoncred:tab' %}?tipo=tp" hx-indicator="#indicator" >Termos de Parceria
+              </a></li>
+              
+              <li><a href="nav-item" class="" hx-get="{% url 'amazoncred:tab' %}?tipo=ce" hx-indicator="#indicator" >Certidões
+              </a></li>
+              
+              <li><a class="nav-item" hx-get="{% url 'amazoncred:tab' %}?tipo=ed" hx-indicator="#indicator" >Editais
+              </a></li>
+              
+              
+                <div id="indicator">
+
+                  <div class="htmx-indicator spinner-border m-1" role="status" >
+                    <span class="visually-hidden">Loading...</span>
+                  </div>  
+                </div>
+            </ul>
+          </div>
+        </div>
+        
+
+        <div id="tab-contents" class="container mt-3"  
+          hx-get="{% url 'amazoncred:tab' %}?tipo=dc"
+          hx-trigger='load' hx-indicator="#indicator">
+        
+        </div>
+      
+      
+    
+    </div>
+    
+
+    </section>    
+
+  </main><!-- End #main -->
+
+  {% endblock content %}
+
+  
+{% block extra_scripts %}
+    <script src="https://unpkg.com/hyperscript.org"></script>     
+    
+    <script>
+
+    </script>
+    
+{% endblock %}

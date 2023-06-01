@@ -1,0 +1,67 @@
+{% if user.is_authenticated %}
+<div class="d-flex justify-content-end">
+    <div class="align-self-end mt-1"> 
+      <button hx-get="{% url 'amazoncred:novo_relatorio' %}?tipo={{tipo}}" 
+              hx-target="#tab-contents" class="btn btn-success"> Novo </button>
+    </div>
+</div>
+{% endif %}
+            
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <colgroup>
+            <col class="col-6">
+            <col class="col-2">
+        </colgroup>
+        <thead>
+            <tr>
+              <th scope="col">Título</th>
+              <th scope="col">Baixar</th>
+              {% if user.is_authenticated %}
+              <th scope="col">Editar</th>
+              <th scope="col">Apagar</th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for obj in obj_list  %}
+            <tr>
+              <td>{{ obj.titulo }}</td>
+              {% if obj.arquivo %}
+              
+              <td><a href="{{obj.arquivo.url}}" target="_blank"><i class="fa-solid fa-download"></i></a></td>
+              {% else %}
+              <td>#</td>
+              {% endif %}
+              
+              {% if user.is_authenticated %}
+              <td> 
+                <a href="#" hx-get="{% url 'amazoncred:editar_relatorio' %}?id={{obj.id}}" 
+                hx-target="#tab-contents">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+              </td>
+              <td> <form action="" hx-POST="{% url 'amazoncred:remover_relatorio' %}"  
+                hx-target="#tab-contents" _="on htmx:confirm(issueRequest)
+                halt the event
+                call Swal.fire({icon: 'error', title: 'Confirmar Exclusão', text:'Você deseja continuar?',showCancelButton: true,cancelButtonText:'Cancelar'})
+                if result.isConfirmed issueRequest()"
+                >
+                  <input type="hidden" name="id", value="{{obj.id}}">
+                  <input type="hidden" name="tipo" value="{{tipo}}">
+                  <button style="border: none; color: var(--color-primary)" type="submit"><i class="fa-solid fa-trash"></i></button>
+                  </form>
+                </a> 
+              </td>
+              {% endif %}
+
+            </tr>
+            {% empty %}
+            <tr><td>vazio</td></tr>
+            {% endfor %}
+          </tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
