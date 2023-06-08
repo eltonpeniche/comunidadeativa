@@ -1619,6 +1619,8 @@ section {
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
+
+
 .contact .info-container {
   background-color: var(--color-primary);
   height: 100%;
@@ -1844,6 +1846,12 @@ section {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
 
+@media (max-width: 1081px){
+  .info-container {
+    display: none!important;;
+  } 
+}
+
 @media (max-width: 991px) {
   #hero {
     height: 70vh;
@@ -1877,7 +1885,8 @@ section {
 
   #hero .hero-img img {
     width: 70%;
-  }
+  } 
+  
 }
 
 @media (max-width: 575px) {
