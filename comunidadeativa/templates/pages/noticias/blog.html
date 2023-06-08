@@ -10,8 +10,8 @@
         <div class="container position-relative">
           <div class="row d-flex justify-content-center">
             <div class="col-lg-6 text-center">
-              <h2>Blog Details</h2>
-              <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+              <h2>Notícias sobre a ComunidadeAtiva</h2>
+              <p>Fique por dentro</p>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
             <h3 class="search-form-title">Pesquisar</h3>
           {% comment %} action="{% url 'amazoncred:pesquisar_post' %}" {% endcomment %}
             <form action="{% url 'amazoncred:pesquisar_post' %}" method="post" class="mt-3"> {% csrf_token %}
-              <input class="search-input" type="text" name='q'
+              <input class="search-input" type="text" name='q' value= {{request.POST.q}}
               hx-post="{% url 'amazoncred:pesquisar_post_htmx' %}" 
               hx-trigger="keyup changed delay:500ms, search" 
               hx-target="#result-search" 
